@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-apps
+  labels:
+    app: my-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-apps
+  template:
+    metadata:
+      labels:
+        app: my-apps
+    spec:
+      containers:
+      - name: my-apps
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$BUILD_TAG
+        ports:
+        - containerPort: 2000
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: $AWS_ACCESS_KEY_ID
+          - name: AWS_SECRET_ACCESS_KEY
+            value: $AWS_SECRET_ACCESS_KEY
+          - name: AWS_SESSION_TOKEN
+            value: $AWS_SESSION_TOKEN
+          - name: AWS_REGION
+            value: $AWS_REGION
+          - name: "ATHENA_DB"
+            value: "rekognition_results_db"
+          - name: "S3_STAGING_DIR"
+            value: "s3://technooutput-denpasar-arif/"
+          - name: "FLASK_SECRET_KEY"
+            value: "lks"
+          - name: "API_GATEWAY_URL"
+            value: "https://p0n1u1qp22.execute-api.us-east-1.amazonaws.com/dev"
+          - name: "SNS_TOPIC_ARN"
+            value: "arn:aws:sns:us-east-1:142277785160:techno-sns-denpasar-arif"
+          - name: "ATHENA_SCHEMA_NAME"
+            value: "rekognition_results_table"
