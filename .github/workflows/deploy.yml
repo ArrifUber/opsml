@@ -59,7 +59,7 @@ jobs:
       AWS_REGION: ${{ secrets.AWS_REGION }}
       ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
       ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-      BUILD_TAG: ${GITHUB_REF_NAME}
+      BUILD_TAG: ${{GITHUB_REF_NAME}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -77,11 +77,12 @@ jobs:
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: setup file deploy
+        shell: bash
         run: |
           envsubst < deploy.template.yaml > deploy.yaml
       - name: Delete old Kubernetes resources
         run: |
-          kubectl delete deployment my-apps
+          kubectl delete deployment my-apps || true
 
       - name: Deploy new version to EKS
         run: |
