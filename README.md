@@ -1,11 +1,13 @@
 # This project using Python and deployment with AWS EKS
 
 ## Form Data
+
 Input your data in here:<br/>
-Name : <br/>
-YourCity : 
+Name : Name
+YourCity : City
 
 ## Application Port
+
 `Port application running on 2000`
 
 ## Environment Variable for Apps
@@ -21,8 +23,8 @@ YourCity :
 - SNS_TOPIC_ARN=your sns topic
 - ATHENA_SCHEMA_NAME=your db athena
 
-
 ## Environment for Github Action
+
 - AWS_ACCESS_KEY_ID=your access key id
 - AWS_SECRET_ACCESS_KEY=your secret access key
 - AWS_SESSION_TOKEN=your session token
@@ -32,10 +34,10 @@ YourCity :
 - CLUSTER_NAME = your name cluster EKS
 
 ## Install Dependencies
+
 `pip install -r requirements.txt`
 
 ## 📊 Query Athena
-
 
 ```sql
 CREATE EXTERNAL TABLE IF NOT EXISTS rekognition_results_db.rekognition_results_table (
@@ -48,3 +50,4 @@ WITH SERDEPROPERTIES (
 )
 LOCATION 's3://your-destination-bucket/results'
 TBLPROPERTIES ('has_encrypted_data'='false');
+```
