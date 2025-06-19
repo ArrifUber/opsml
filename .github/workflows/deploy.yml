@@ -59,7 +59,7 @@ jobs:
       AWS_REGION: ${{ secrets.AWS_REGION }}
       ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
       ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-      BUILD_TAG: ${{GITHUB_REF_NAME}}
+      BUILD_TAG: ${GITHUB_REF_NAME}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
