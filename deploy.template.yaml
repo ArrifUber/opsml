@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-apps
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$BUILD_TAG
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF_NAME}
         ports:
         - containerPort: 2000
         env:
