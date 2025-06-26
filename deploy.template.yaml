@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-apps
+  name: techno-app
   labels:
-    app: my-apps
+    app: techno-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-apps
+      app: techno-app
   template:
     metadata:
       labels:
-        app: my-apps
+        app: techno-app
     spec:
       containers:
-      - name: my-apps
+      - name: techno-app
         image: $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF_NAME}
         ports:
         - containerPort: 2000
@@ -35,8 +35,8 @@ spec:
         - name: "FLASK_SECRET_KEY"
           value: "lks"
         - name: "API_GATEWAY_URL"
-          value: "https://p0n1u1qp22.execute-api.us-east-1.amazonaws.com/dev"
+          value: "https://sfieyabv83.execute-api.us-east-1.amazonaws.com/dev"
         - name: "SNS_TOPIC_ARN"
-          value: "arn:aws:sns:us-east-1:142277785160:techno-sns-denpasar-arif"
+          value: "arn:aws:sns:us-east-1:467350923741:techno-sns-denpasar-arif"
         - name: "ATHENA_SCHEMA_NAME"
-          value: "rekognition_results_table"
+          value: "rekognition_results_db"
