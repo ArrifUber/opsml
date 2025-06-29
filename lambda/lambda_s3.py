@@ -7,7 +7,7 @@ sns = boto3.client('sns')
 s3 = boto3.client('s3')
 kinesis = boto3.client('kinesis')
 
-SNS_TOPIC_ = os.environ['SNS_TOPIC_']
+SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
 KINESIS_STREAM_NAME = os.environ['KINESIS_STREAM_NAME']
 DEST_BUCKET = os.environ['DEST_BUCKET']
 
@@ -46,7 +46,7 @@ def lambda_handler(event, context):
 
         # Kirim notifikasi ke SNS dengan nama bucket
         sns.publish(
-            Topic=SNS_TOPIC_,
+            TopicArn=SNS_TOPIC_ARN,
             Message=f"Hasil analisa gambar {key} dari bucket {bucket}: {json.dumps(labels)}",
             Subject="Hasil Rekognition"
         )
